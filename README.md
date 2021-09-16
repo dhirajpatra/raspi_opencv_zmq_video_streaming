@@ -34,10 +34,10 @@ python StreamViewer.py -d no
 ifconfig
 ```
 
-get the IP address of the raspberry pi and put into the below command
+get the IP address of the raspberry pi and put into the below command. Also optional you can use -w and -h for window resolution of width and height for display
 
 ```
-python Streamer.py -s 192.168.1.X
+python Streamer.py -s 192.168.1.X -rw 640 -rh 480
 ```
 
 You will see the video being streamed across the network to your Viewer.

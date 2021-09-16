@@ -4,13 +4,13 @@ import cv2
 import zmq
 
 from camera.Camera import Camera
-from constants import PORT, SERVER_ADDRESS
+from constants import PORT, SERVER_ADDRESS, RESOLUTION_W, RESOLUTION_H
 from utils import image_to_string
 
 
 class Streamer:
 
-    def __init__(self, server_address=SERVER_ADDRESS, port=PORT):
+    def __init__(self, server_address=SERVER_ADDRESS, port=PORT, width=RESOLUTION_W, height=RESOLUTION_H):
         """
         Tries to connect to the StreamViewer with supplied server_address and creates a socket for future use.
 
@@ -23,6 +23,8 @@ class Streamer:
         self.footage_socket = context.socket(zmq.PUB)
         self.footage_socket.connect('tcp://' + server_address + ':' + port)
         self.keep_running = True
+        self.width = width
+        self.height = height
 
     def start(self):
         """
@@ -31,7 +33,7 @@ class Streamer:
         :return: None
         """
         print("Streaming Started...")
-        camera = Camera()
+        camera = Camera(height=self.height, width=self.width)
         camera.start_capture()
         self.keep_running = True
 
@@ -58,6 +60,8 @@ class Streamer:
 def main():
     port = PORT
     server_address = SERVER_ADDRESS
+    width = RESOLUTION_W
+    height = RESOLUTION_H
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-s', '--server',
@@ -67,6 +71,10 @@ def main():
     parser.add_argument('-p', '--port',
                         help='The port which you want the Streaming Server to use, default'
                              ' is ' + PORT, required=False)
+    parser.add_argument(
+        '-rw', '--width', help=f'set the window width, default is {width}', required=False)
+    parser.add_argument(
+        '-rh', '--height', help=f'set the window height, default is {height}', required=False)
 
     args = parser.parse_args()
 
@@ -74,8 +82,12 @@ def main():
         port = args.port
     if args.server:
         server_address = args.server
+    if args.width:
+        width = int(args.width)
+    if args.height:
+        height = int(args.height)
 
-    streamer = Streamer(server_address, port)
+    streamer = Streamer(server_address, port, width, height)
     streamer.start()
 
 
