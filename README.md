@@ -1,10 +1,10 @@
-# PiCamera Video Stream with Python
+# PiCamera Video Stream with Python, OpenCV and zmq
 
 Webcam or PiCamera Streaming over the Network with Python
 
 ## Getting Started
 
-This is a Python Application which makes streaming video from webcams over the network a breeze.
+This is a Python Application which makes streaming video from webcams over the network access by tcp.
 
 ### Prerequisites
 
