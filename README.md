@@ -65,4 +65,5 @@ python -m unittest discover .
 - **[OpenCV](http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_setup/py_intro/py_intro.html)** - a library of programming functions mainly aimed at real-time computer vision.
 - **[ZeroMQ](http://zeromq.org/bindings:python)** - a high-performance asynchronous messaging library, aimed at use in distributed or concurrent applications.
 
-<small>I have taken help from various tutorials and documents.</small>
+I have taken help from various tutorials and documents.
+Requesting you to feel free to fork and update with more features.
